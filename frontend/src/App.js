@@ -3,6 +3,8 @@ import axios from 'axios';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 
+const API_BASE_URL = 'https://sri-bharathi-em-school.onrender.com';
+
 export default function App() {
   // Navigation: 'website' or 'portal'
   const [currentView, setCurrentView] = useState('website');
@@ -52,14 +54,14 @@ export default function App() {
   const reportRef = useRef();
 
   const loadData = () => {
-    axios.get('http://localhost:5000/api/students').then(res => {
+    axios.get(`${API_BASE_URL}/api/students`).then(res => {
       setStudents(res.data);
       const initial = {};
       res.data.forEach(s => { initial[s._id] = 'Present'; });
       setAttendanceRecords(initial);
     }).catch(console.error);
 
-    axios.get('http://localhost:5000/api/fees/pending').then(res => setPendingStudents(res.data)).catch(console.error);
+    axios.get(`${API_BASE_URL}/api/fees/pending`).then(res => setPendingStudents(res.data)).catch(console.error);
   };
 
   useEffect(() => {
@@ -131,7 +133,7 @@ export default function App() {
     e.preventDefault();
     if (userRole !== 'admin') return alert('Admin access required.');
     try {
-      await axios.post('http://localhost:5000/api/students', {
+      await axios.post(`${API_BASE_URL}/api/students`, {
         rollNo: String(newStudent.rollNo).trim(),
         name: newStudent.name.trim(),
         standard: newStudent.standard,
@@ -159,7 +161,7 @@ export default function App() {
     formData.append('file', file);
 
     try {
-      await axios.post('http://localhost:5000/api/students/upload-excel', formData, {
+      await axios.post(`${API_BASE_URL}/api/students/upload-excel`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
       alert('Excel Students Data Imported Successfully! 📊✅');
@@ -173,7 +175,7 @@ export default function App() {
   const handleUpdateStudent = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:5000/api/students/${editingStudent._id}`, editingStudent);
+      await axios.put(`${API_BASE_URL}/api/students/${editingStudent._id}`, editingStudent);
       setEditingStudent(null);
       loadData();
       alert('Student Updated! ✅');
@@ -186,7 +188,7 @@ export default function App() {
   const handleDeleteStudent = async (id) => {
     if (window.confirm('Are you sure you want to delete this student?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/students/${id}`);
+        await axios.delete(`${API_BASE_URL}/api/students/${id}`);
         loadData();
       } catch (err) {
         alert('Failed to delete');
@@ -224,7 +226,7 @@ export default function App() {
 
     try {
       setAttendanceStatusMsg('Saving...');
-      await axios.post('http://localhost:5000/api/attendance', {
+      await axios.post(`${API_BASE_URL}/api/attendance`, {
         date: attendanceDate,
         standard: attendanceClass,
         records
@@ -892,7 +894,7 @@ export default function App() {
                   <div style={{ marginTop: '20px', padding: '16px', background: '#eff6ff', borderRadius: '6px', borderLeft: '4px solid #2563eb' }}>
                     <b>Demo Student Data Setup:</b>
                     <br /><br />
-                    <button onClick={() => axios.get('http://localhost:5000/api/seed').then(loadData)} style={{ background: '#10b981', color: '#fff', border: 'none', padding: '10px 16px', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}>
+                    <button onClick={() => axios.get(`${API_BASE_URL}/api/seed`).then(loadData)} style={{ background: '#10b981', color: '#fff', border: 'none', padding: '10px 16px', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}>
                       + Load Demo Student Data
                     </button>
                   </div>
