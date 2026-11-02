@@ -259,21 +259,15 @@ export default function App() {
     <div className={`app-shell theme-${themeMode}`} style={{ minHeight: '100vh', fontFamily: "'Segoe UI', Roboto, sans-serif", background: '#f8fafc', color: '#1e293b' }}>
       
       {/* GLOBAL TOP NAV HEADER */}
-      <header style={{ background: '#0f172a', color: '#fff', padding: '0 32px', height: '75px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', boxShadow: '0 4px 12px rgba(0,0,0,0.15)' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '14px', cursor: 'pointer' }} onClick={() => setCurrentView('website')}>
-          <span style={{ fontSize: '32px' }}>🏫</span>
+      <header className="app-header" style={{ background: '#0f172a', color: '#fff', padding: '0 32px', height: '75px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', boxShadow: '0 4px 12px rgba(0,0,0,0.15)' }}>
+        <div className="school-brand" style={{ display: 'flex', alignItems: 'center', gap: '14px', cursor: 'pointer' }} onClick={() => setCurrentView('website')}>
+          <span className="school-brand-icon" style={{ fontSize: '32px' }}>🏫</span>
           <div>
-            <h1 style={{ 
-              margin: 0, 
-              fontSize: '20px', 
-              fontWeight: '900', 
-              letterSpacing: '0.8px', 
-              color: '#facc15',
-              textShadow: '0 2px 4px rgba(0,0,0,0.5)'
-            }}>
-              SRI BHARATHI EM SCHOOL
+            <h1 className="school-brand-name">
+              <span>SRI BHARATHI</span>
+              <span>ENGLISH MEDIUM SCHOOL</span>
             </h1>
-            <small style={{ color: '#38bdf8', fontSize: '12px', fontWeight: 'bold', letterSpacing: '1px' }}>
+            <small className="school-brand-location" style={{ color: '#38bdf8', fontSize: '12px', fontWeight: 'bold', letterSpacing: '1px' }}>
               📍 NAGASAMUDRAM | Nursery to 6th Class
             </small>
           </div>
