@@ -259,13 +259,13 @@ export default function App() {
     <div className={`app-shell theme-${themeMode}`} style={{ minHeight: '100vh', fontFamily: "'Segoe UI', Roboto, sans-serif", background: '#f8fafc', color: '#1e293b' }}>
       
       {/* GLOBAL TOP NAV HEADER */}
-      <header className="app-header" style={{ background: '#0f172a', color: '#fff', padding: '0 32px', height: '75px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', boxShadow: '0 4px 12px rgba(0,0,0,0.15)' }}>
+      <header className="app-header" style={{ background: '#0f172a', color: '#fff', boxShadow: '0 4px 12px rgba(0,0,0,0.15)' }}>
         <div className="school-brand" style={{ display: 'flex', alignItems: 'center', gap: '14px', cursor: 'pointer' }} onClick={() => setCurrentView('website')}>
           <span className="school-brand-icon" style={{ fontSize: '32px' }}>🏫</span>
           <div>
             <h1 className="school-brand-name">
-              <span>SRI BHARATHI</span>
-              <span>ENGLISH MEDIUM SCHOOL</span>
+              <span className="school-brand-primary">SRI BHARATHI</span>
+              <span className="school-brand-secondary">ENGLISH MEDIUM SCHOOL</span>
             </h1>
             <small className="school-brand-location" style={{ color: '#38bdf8', fontSize: '12px', fontWeight: 'bold', letterSpacing: '1px' }}>
               📍 NAGASAMUDRAM | Nursery to 6th Class
@@ -274,7 +274,7 @@ export default function App() {
         </div>
 
         {/* Top Navigation Switcher */}
-        <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+        <div className="school-header-nav" style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
           <button
             type="button"
             onClick={() => setThemeMode(themeMode === 'dark' ? 'light' : 'dark')}
